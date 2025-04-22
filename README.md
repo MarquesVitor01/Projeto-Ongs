@@ -1,50 +1,17 @@
-# Welcome to your Expo app 👋
+<p align="center">
+  <img height="300px" src="https://github.com/user-attachments/assets/5820214b-910f-4825-8235-7d45ec96aee8" ">
+</p>
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# Jogada Certa
 
-## Get started
+**Jogada Certa** é um aplicativo mobile dedicado para **organizações não governamentais (ONGs)** que utilizam o tema esporte como ferramenta de transformação social com voluntários, patrocinadores e a comunidade em geral. O app visa facilitar a informação e divulgação de **projetos sociais esportivos**, promover **eventos de impacto social** e incentivar **doações e apoio** às causas esportivas que buscam melhorar a vida de pessoas ao Brasil.
 
-1. Install dependencies
+## Objetivo
 
-   ```bash
-   npm install
-   ```
+Principal objetivo do **Jogada Certa** é reunir iniciativas esportivas com foco social, proporcionando uma plataforma onde ONGs podem divulgar seus projetos, realizar campanhas de arrecadação e conectar com voluntários e parceiros dispostos a ajudar. O app oferece uma maneira simples e eficiente de se engajar com a comunidade, ajudar no desenvolvimento de novas iniciativas e promover um impacto positivo por meio do esporte.
 
-2. Start the app
+## Tecnologias Usadas
 
-   ```bash
-    npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- **Frontend**: React Native (para aplicativos móveis Android e iOS)
+- **Backend**: Node.js / Express 
+- **Banco de Dados / Autenticação**: Firebase
