@@ -66,6 +66,7 @@ const styles = StyleSheet.create({
   },
   scroll: {
     padding: 20,
+    paddingTop: 60,
     paddingBottom: 100,
   },
   title: {
@@ -76,7 +77,7 @@ const styles = StyleSheet.create({
   line: {
     height: 2,
     backgroundColor: "#ccc",
-    marginTop: 4,
+    marginTop: 10,
     marginBottom: 20,
     width: "100%",
   },

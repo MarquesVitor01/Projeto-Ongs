@@ -14,8 +14,8 @@ export default function SideBar({ visible, onClose }: SideBarProps) {
   if (!visible) return null;
 
   const handleNavigate = (route: string) => {
-    navigation.navigate(route as never); // ou navigation.navigate(route) se estiver tipado corretamente
-    onClose(); // fecha o menu ao navegar
+    navigation.navigate(route as never); 
+    onClose();
   };
 
   return (
@@ -27,7 +27,7 @@ export default function SideBar({ visible, onClose }: SideBarProps) {
 
         <Image source={require('../assets/logo.png')} style={styles.avatar} />
 
-        <TouchableOpacity style={styles.menuItem} onPress={() => handleNavigate('inicio')}>
+        <TouchableOpacity style={styles.menuItem} onPress={() => handleNavigate('home')}>
           <FontAwesome name="home" size={20} color="#555" style={styles.icon} />
           <Text style={styles.menuText}>Início</Text>
         </TouchableOpacity>
@@ -37,19 +37,19 @@ export default function SideBar({ visible, onClose }: SideBarProps) {
           <Text style={styles.menuText}>Perfil</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.menuItem} onPress={() => handleNavigate('sobre')}>
+        <TouchableOpacity style={styles.menuItem} onPress={() => handleNavigate('(tabs)/sobre')}>
           <FontAwesome name="bell" size={20} color="#555" style={styles.icon} />
           <Text style={styles.menuText}>Sobre</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.menuItem} onPress={() => handleNavigate('projetos')}>
+        <TouchableOpacity style={styles.menuItem} onPress={() => handleNavigate('(tabs)/projetos')}>
           <FontAwesome name="folder" size={20} color="#555" style={styles.icon} />
           <Text style={styles.menuText}>Projetos</Text>
         </TouchableOpacity>
 
         <View style={styles.separator} />
 
-        <TouchableOpacity style={styles.logoutButton} onPress={() => handleNavigate('login')}>
+        <TouchableOpacity style={styles.logoutButton} onPress={() => handleNavigate('(tabs)/login')}>
           <Text style={styles.logoutText}>Sair</Text>
         </TouchableOpacity>
       </View>

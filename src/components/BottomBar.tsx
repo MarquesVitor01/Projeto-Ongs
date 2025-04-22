@@ -10,7 +10,7 @@ interface BottomBarProps {
 export default function BottomBar({ onPress }: BottomBarProps) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => onPress?.('inicio')} style={styles.iconButton}>
+      <TouchableOpacity onPress={() => onPress?.('home')} style={styles.iconButton}>
         <FontAwesome name="home" size={24} color="#fff" />
         <Text style={styles.label}>Home</Text>
       </TouchableOpacity>
@@ -46,6 +46,8 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     zIndex: 10,
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
   },
   iconButton: {
     alignItems: 'center',
