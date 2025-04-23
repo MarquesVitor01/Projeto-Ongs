@@ -12,22 +12,18 @@ export default function BottomBar({ onPress }: BottomBarProps) {
     <View style={styles.container}>
       <TouchableOpacity onPress={() => onPress?.('home')} style={styles.iconButton}>
         <FontAwesome name="home" size={24} color="#fff" />
-        <Text style={styles.label}>Home</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => onPress?.('sobre')} style={styles.iconButton}>
-        <FontAwesome name="bell" size={24} color="#fff" />
-        <Text style={styles.label}>Sobre</Text>
+        <FontAwesome name="info-circle" size={24} color="#fff" />
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => onPress?.('projetos')} style={styles.iconButton}>
         <FontAwesome name="folder" size={24} color="#fff" />
-        <Text style={styles.label}>Projetos</Text>
       </TouchableOpacity>
 
       <TouchableOpacity onPress={() => onPress?.('inicio')} style={styles.iconButton}>
         <FontAwesome name="user" size={24} color="#fff" />
-        <Text style={styles.label}>Perfil</Text>
       </TouchableOpacity>
     </View>
   );
@@ -38,7 +34,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     backgroundColor: '#16232C',
-    paddingVertical: 10,
+    paddingVertical: 30,
     borderTopColor: '#ddd',
     borderTopWidth: 1,
     position: 'absolute',

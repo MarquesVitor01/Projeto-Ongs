@@ -85,7 +85,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 20,
     paddingTop: 100,
-    backgroundColor: "#EDEFF1",
+    backgroundColor: "#f0f2f5",
     flexGrow: 1,
   },
   backButton: {

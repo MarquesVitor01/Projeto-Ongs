@@ -11,7 +11,7 @@ import { useRouter } from "expo-router";
 import { FontAwesome5 } from "@expo/vector-icons";
 import BottomBar from "../components/BottomBar";
 
-export default function EsportesScreen() {
+export default function FinalizadoScreen() {
   const router = useRouter();
 
   const handleParticipar = () => {
@@ -46,56 +46,32 @@ export default function EsportesScreen() {
       <TouchableOpacity style={styles.backButton} onPress={handleVoltar}>
         <FontAwesome5 name="arrow-left" size={20} color="#16232C" />
       </TouchableOpacity>
+      <Image
+        source={require("../assets/logo.png")}
+        style={styles.image_logo}
+        resizeMode="contain"
+      />
       <View style={styles.card}>
-        <Text style={styles.title}>Futebol</Text>
-
-        <Image
-          source={require("../assets/soccer.avif")}
-          style={styles.image}
-          resizeMode="cover"
-        />
-
-        <Text style={styles.subtitle}>Saúde, bem-estar e diversão</Text>
-
-        <Text style={styles.description}>
-          Participe das nossas atividades esportivas semanais e melhore seu
-          condicionamento físico enquanto se diverte!
+        <Text style={styles.subtitle}>
+          Parabéns! Sua participação está confirmada 🎉
         </Text>
 
-        <View style={styles.topic}>
-          <FontAwesome5
-            name="running"
-            size={22}
-            color="#16232C"
-            style={styles.icon}
-          />
-          <Text style={styles.topicText}>Corridas e caminhadas em grupo</Text>
-        </View>
+        <Text style={styles.description}>
+          Estamos muito felizes em contar com você no Futebol Solidário.
+          Juntos, vamos transformar vidas através do esporte e da solidariedade.
+        </Text>
 
-        <View style={styles.topic}>
-          <FontAwesome5
-            name="futbol"
-            size={22}
-            color="#16232C"
-            style={styles.icon}
-          />
-          <Text style={styles.topicText}>
-            Futebol e vôlei aos finais de semana
-          </Text>
-        </View>
-
-        <View style={styles.topic}>
-          <FontAwesome5
-            name="bicycle"
-            size={22}
-            color="#16232C"
-            style={styles.icon}
-          />
-          <Text style={styles.topicText}>Passeios ciclísticos pela cidade</Text>
-        </View>
+        <Image
+        source={require("../assets/kids 1.png")}
+        style={styles.image}
+        resizeMode="contain"
+      />
+        <Text style={styles.description}>
+        Obrigado por fazer parte dessa corrente do bem!
+        </Text>
 
         <TouchableOpacity style={styles.button} onPress={handleParticipar}>
-          <Text style={styles.buttonText}>Participar</Text>
+          <Text style={styles.buttonText}>Voltar ao Inicio</Text>
         </TouchableOpacity>
       </View>
       <BottomBar onPress={handleNavigate} />
@@ -137,9 +113,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     textAlign: "center",
   },
+  image_logo: {
+    width: "100%",
+    height: 100,
+    borderRadius: 16,
+    marginBottom: 20,
+  },
   image: {
     width: "100%",
-    height: 200,
+    height: 150,
     borderRadius: 16,
     marginBottom: 20,
   },

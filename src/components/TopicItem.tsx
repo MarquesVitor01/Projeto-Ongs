@@ -10,7 +10,6 @@ interface TopicItemProps {
 export default function TopicItem({ icon, label }: TopicItemProps) {
   return (
     <View style={styles.item}>
-      <FontAwesome name={icon} size={20} color="#666" style={styles.icon} />
       <Text style={styles.label}>{label}</Text>
     </View>
   );
@@ -20,14 +19,13 @@ const styles = StyleSheet.create({
   item: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 8,
-    paddingHorizontal: 10,
+    padding: 10
   },
   icon: {
     marginRight: 10,
   },
   label: {
     fontSize: 18,
-    color: '#333',
+    color: '#fff',
   },
 });

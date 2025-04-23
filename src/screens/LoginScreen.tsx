@@ -12,7 +12,7 @@ export default function LoginScreen() {
 
   const handleLogin = () => {
     if (email === "admin@admin.com" && password === "123456") {
-      router.push("/inicio");
+      router.push("/home");
     } else {
       Alert.alert("Erro", "Email ou senha incorretos");
     }

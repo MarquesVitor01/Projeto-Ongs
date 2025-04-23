@@ -36,5 +36,6 @@ const styles = StyleSheet.create({
   },
   menuText: {
     fontSize: 22,
+    color: "#5B2A6C"
   },
 });

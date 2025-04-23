@@ -6,26 +6,24 @@ import BottomBar from "../components/BottomBar";
 import { useRouter } from 'expo-router';
 
 export default function SobreScreen() {
-    const router = useRouter();
+  const router = useRouter();
 
-    const handleNavigate = (route: string) => {
-        switch (route) {
-          case 'inicio':
-            router.push('/inicio'); 
-            break;
-          case 'projetos':
-            router.push('/projetos');
-            break;
-          case 'sobre':
-            router.push('/sobre');
-            break;
-          case 'inicio':
-            router.push('/inicio');
-            break;
-          default:
-            console.warn('Rota inválida:', route);
-        }
-      };
+  const handleNavigate = (route: string) => {
+    switch (route) {
+      case 'home':
+        router.push('/home');
+        break;
+      case 'projetos':
+        router.push('/projetos');
+        break;
+      case 'sobre':
+        router.push('/sobre');
+        break;
+      default:
+        console.warn('Rota inválida:', route);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <ScrollView contentContainerStyle={styles.scroll}>
@@ -37,12 +35,12 @@ export default function SobreScreen() {
         <InfoBlock />
 
         <View style={styles.topicList}>
-          <TopicItem icon="futbol-o" label="ESPORTE" />
-          <TopicItem icon="heartbeat" label="SAÚDE" />
-          <TopicItem icon="paint-brush" label="CULTURA" />
-          <TopicItem icon="balance-scale" label="CIDADANIA" />
-          <TopicItem icon="star" label="PROTAGONISMO" />
-          <TopicItem icon="users" label="COMUNIDADE" />
+          <View style={styles.topicItem}><TopicItem icon="futbol-o" label="ESPORTE" /></View>
+          <View style={styles.topicItem}><TopicItem icon="heartbeat" label="SAÚDE" /></View>
+          <View style={styles.topicItem}><TopicItem icon="paint-brush" label="CULTURA" /></View>
+          <View style={styles.topicItem}><TopicItem icon="balance-scale" label="CIDADANIA" /></View>
+          <View style={styles.topicItem}><TopicItem icon="star" label="PROTAGONISMO" /></View>
+          <View style={styles.topicItem}><TopicItem icon="users" label="COMUNIDADE" /></View>
         </View>
 
         <Text style={styles.description}>
@@ -62,7 +60,7 @@ export default function SobreScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fafafa",
+    backgroundColor: "#f0f2f5",
   },
   scroll: {
     padding: 20,
@@ -70,31 +68,52 @@ const styles = StyleSheet.create({
     paddingBottom: 100,
   },
   title: {
-    fontSize: 26,
+    fontSize: 28,
     fontWeight: "bold",
-    color: "#333",
+    color: "#16232C",
+    textAlign: "center",
+    marginBottom: 10,
   },
   line: {
-    height: 2,
-    backgroundColor: "#ccc",
-    marginTop: 10,
-    marginBottom: 20,
-    width: "100%",
+    height: 3,
+    backgroundColor: "#16232C",
+    marginVertical: 15,
+    width: "40%",
+    alignSelf: "center",
+    borderRadius: 5,
   },
   subtitle: {
-    fontSize: 20,
-    fontWeight: "600",
+    fontSize: 22,
+    fontWeight: "700",
+    color: "#C62828",
     marginBottom: 10,
-    color: "#555",
+    textAlign: "center",
   },
   topicList: {
     marginTop: 10,
     marginBottom: 30,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-around",
+    gap: 12,
+  },
+  topicItem: {
+    backgroundColor: "#16232C",
+    padding: 25,
+    borderRadius: 16,
+    marginBottom: 12,
+    width: "45%",
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 2, height: 3 },
+    shadowOpacity: 0.3,
+    shadowRadius: 6,
+    elevation: 6,
   },
   description: {
     fontSize: 16,
     color: "#444",
     lineHeight: 24,
-    marginTop: 10,
+    textAlign: "justify",
   },
 });

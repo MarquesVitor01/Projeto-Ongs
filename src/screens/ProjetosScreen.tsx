@@ -10,12 +10,11 @@ export default function ProjetoScreen() {
   const handlePress = (titulo: string) => {
     Alert.alert('Detalhes', `Você clicou no botão do ${titulo}`);
   };
-  
 
   const handleNavigate = (route: string) => {
     switch (route) {
-      case 'inicio':
-        router.push('/inicio'); 
+      case 'home':
+        router.push('/home');
         break;
       case 'projetos':
         router.push('/projetos');
@@ -23,37 +22,42 @@ export default function ProjetoScreen() {
       case 'sobre':
         router.push('/sobre');
         break;
-      case 'inicio':
-        router.push('/inicio');
-        break;
       default:
         console.warn('Rota inválida:', route);
     }
   };
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.screen}>
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.title}>Meus Projetos</Text>
-        <Text style={styles.subtitle}>Veja abaixo alguns dos meus trabalhos recentes:</Text>
+        <Text style={styles.title}>Projetos Disponiveis</Text>
+        <Text style={styles.description}>
+          Explore abaixo algumas soluções criadas com dedicação e propósito. Cada projeto é um passo rumo à inovação e ao impacto positivo.
+        </Text>
 
         <ProjectCard
-          title="Projeto 1"
-          subtitle="Aplicativo de Lista de Tarefas"
-          image={require('../assets/logo.png')}
-          onPress={() => handlePress("Projeto 1")}
+          title="Futebol"
+          subtitle="São Paulo, SP"
+          image={require('../assets/soccer.avif')}
+          onPress={() => handlePress("Futebol")}
         />
         <ProjectCard
-          title="Projeto 2"
-          subtitle="Sistema de Vendas"
-          image={require('../assets/logo.png')}
-          onPress={() => handlePress("Projeto 2")}
+          title="Esporte sem Barreiras"
+          subtitle="Campinas, SP"
+          image={require('../assets/pcd.avif')}
+          onPress={() => handlePress("Esporte sem Barreiras")}
         />
         <ProjectCard
-          title="Projeto 3"
-          subtitle="Website Portfólio"
-          image={require('../assets/logo.png')}
-          onPress={() => handlePress("Projeto 3")}
+          title="Capoeira"
+          subtitle="Embu, SP"
+          image={require('../assets/capoeira.avif')}
+          onPress={() => handlePress("Capoeira")}
+        />
+        <ProjectCard
+          title="Ginastica Olimpica"
+          subtitle="Taboão, SP"
+          image={require('../assets/olimpica.avif')}
+          onPress={() => handlePress("Ginastica Olimpica")}
         />
       </ScrollView>
 
@@ -63,19 +67,27 @@ export default function ProjetoScreen() {
 }
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: '#f0f2f5',
+  },
   container: {
-    padding: 20,
-    paddingBottom: 80,
-    backgroundColor: '#F9F9F9',
+    padding: 27,
+    paddingTop: 45,
+    paddingBottom: 100,
   },
   title: {
-    fontSize: 28,
+    fontSize: 30,
     fontWeight: 'bold',
-    marginBottom: 8,
+    textAlign: 'center',
+    color: '#16232C',
+    marginBottom: 10,
   },
-  subtitle: {
+  description: {
     fontSize: 16,
-    color: '#666',
-    marginBottom: 20,
+    textAlign: 'center',
+    color: '#555',
+    lineHeight: 24,
+    marginBottom: 30,
   },
 });

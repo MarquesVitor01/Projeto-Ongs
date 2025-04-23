@@ -5,7 +5,7 @@ import { FontAwesome } from "@expo/vector-icons";
 export default function InfoBlock() {
   return (
     <View style={styles.container}>
-      <FontAwesome name="info" size={32} color="#555" style={styles.icon} />
+      <FontAwesome name="info" size={32} color="#000" style={styles.icon} />
       <Text style={styles.text}>
         Nos núcleos, trabalhamos com o esporte educacional a partir de 6
         objetivos essenciais:
@@ -27,6 +27,6 @@ const styles = StyleSheet.create({
   text: {
     flex: 1,
     fontSize: 16,
-    color: "#444",
+    color: "#666",
   },
 });
