@@ -3,24 +3,27 @@ import { View, Text, ScrollView, StyleSheet } from "react-native";
 import InfoBlock from "../components/InfoBlock";
 import TopicItem from "../components/TopicItem";
 import BottomBar from "../components/BottomBar";
-import { useRouter } from 'expo-router';
+import { useRouter } from "expo-router";
 
 export default function SobreScreen() {
   const router = useRouter();
 
   const handleNavigate = (route: string) => {
     switch (route) {
-      case 'home':
-        router.push('/home');
+      case "home":
+        router.push("/home");
         break;
-      case 'projetos':
-        router.push('/projetos');
+      case "projetos":
+        router.push("/projetos");
         break;
-      case 'sobre':
-        router.push('/sobre');
+      case "sobre":
+        router.push("/sobre");
+        break;
+      case "agenda":
+        router.push("/agenda");
         break;
       default:
-        console.warn('Rota inválida:', route);
+        console.warn("Rota inválida:", route);
     }
   };
 
@@ -35,12 +38,24 @@ export default function SobreScreen() {
         <InfoBlock />
 
         <View style={styles.topicList}>
-          <View style={styles.topicItem}><TopicItem icon="futbol-o" label="ESPORTE" /></View>
-          <View style={styles.topicItem}><TopicItem icon="heartbeat" label="SAÚDE" /></View>
-          <View style={styles.topicItem}><TopicItem icon="paint-brush" label="CULTURA" /></View>
-          <View style={styles.topicItem}><TopicItem icon="balance-scale" label="CIDADANIA" /></View>
-          <View style={styles.topicItem}><TopicItem icon="star" label="PROTAGONISMO" /></View>
-          <View style={styles.topicItem}><TopicItem icon="users" label="COMUNIDADE" /></View>
+          <View style={styles.topicItem}>
+            <TopicItem icon="futbol-o" label="ESPORTE" />
+          </View>
+          <View style={styles.topicItem}>
+            <TopicItem icon="heartbeat" label="SAÚDE" />
+          </View>
+          <View style={styles.topicItem}>
+            <TopicItem icon="paint-brush" label="CULTURA" />
+          </View>
+          <View style={styles.topicItem}>
+            <TopicItem icon="balance-scale" label="CIDADANIA" />
+          </View>
+          <View style={styles.topicItem}>
+            <TopicItem icon="star" label="PROTAGONISMO" />
+          </View>
+          <View style={styles.topicItem}>
+            <TopicItem icon="users" label="COMUNIDADE" />
+          </View>
         </View>
 
         <Text style={styles.description}>

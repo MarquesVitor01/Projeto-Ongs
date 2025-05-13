@@ -4,23 +4,72 @@ import Input from "../components/Input";
 import Button from "../components/Button";
 import Logo from "../components/Logo";
 import { useRouter } from "expo-router";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, getDoc } from "firebase/firestore";
+import { auth, db } from "@/src/config/firebaseConfig";
+import { useUser } from "@/src/context/UserContext";
+
+type UserData = {
+  id: any;
+  uid: string;
+  nome: string;
+  email: string;
+  numero: string;
+  dataNascimento: string;
+};
 
 export default function LoginScreen() {
   const router = useRouter();
+  const { setUser } = useUser();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = () => {
-    if (email === "admin@admin.com" && password === "123456") {
+  const handleLogin = async () => {
+    if (!email || !password) {
+      Alert.alert("Erro", "Preencha e-mail e senha.");
+      return;
+    }
+
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const uid = userCredential.user.uid;
+
+      const docRef = doc(db, "usuarios", uid);
+      const docSnap = await getDoc(docRef);
+
+      if (!docSnap.exists()) {
+        Alert.alert("Erro", "Usuário não encontrado no banco de dados.");
+        return;
+      }
+
+      const dataFromFirestore = docSnap.data();
+
+      const userData: UserData = {
+        id: uid, 
+        uid: uid,
+        nome: dataFromFirestore.nome,
+        email: dataFromFirestore.email,
+        numero: dataFromFirestore.numero,
+        dataNascimento: dataFromFirestore.dataNascimento,
+      };
+
+      setUser(userData);
       router.push("/home");
-    } else {
-      Alert.alert("Erro", "Email ou senha incorretos");
+    } catch (error) {
+      console.log("Erro ao logar:", error);
+      Alert.alert("Erro", "Credenciais inválidas ou erro na autenticação.");
     }
   };
 
-  const handleGoogleLogin = () => {
-    Alert.alert("Login com Google", "Funcionalidade em desenvolvimento");
-  };
+  const handleCadastrar = () => {
+    router.push("/cadastro")
+  }
 
   const handleForgotPassword = () => {
     Alert.alert("Esqueceu sua senha?", "Vamos te ajudar a recuperar.");
@@ -29,7 +78,6 @@ export default function LoginScreen() {
   return (
     <View style={styles.container}>
       <Logo />
-
       <Text style={styles.title}>Entrar</Text>
 
       <Input
@@ -44,7 +92,7 @@ export default function LoginScreen() {
         value={password}
         onChangeText={setPassword}
         secureTextEntry
-        icon="lock" 
+        icon="lock"
       />
 
       <TouchableOpacity onPress={handleForgotPassword}>
@@ -56,8 +104,8 @@ export default function LoginScreen() {
       <View style={styles.divider} />
 
       <Button
-        title="Entrar com Google"
-        onPress={handleGoogleLogin}
+        title="Cadastrar"
+        onPress={handleCadastrar}
         variant="secondary"
       />
     </View>

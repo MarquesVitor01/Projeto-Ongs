@@ -15,7 +15,7 @@ export default function FinalizadoScreen() {
   const router = useRouter();
 
   const handleParticipar = () => {
-    alert("🎉 Você se inscreveu para participar!");
+    router.push("/home")
   };
 
   const handleNavigate = (route: string) => {
@@ -57,7 +57,7 @@ export default function FinalizadoScreen() {
         </Text>
 
         <Text style={styles.description}>
-          Estamos muito felizes em contar com você no Futebol Solidário.
+          Estamos muito felizes em contar com você.
           Juntos, vamos transformar vidas através do esporte e da solidariedade.
         </Text>
 

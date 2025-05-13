@@ -22,8 +22,8 @@ export default function BottomBar({ onPress }: BottomBarProps) {
         <FontAwesome name="folder" size={24} color="#fff" />
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => onPress?.('inicio')} style={styles.iconButton}>
-        <FontAwesome name="user" size={24} color="#fff" />
+      <TouchableOpacity onPress={() => onPress?.('agenda')} style={styles.iconButton}>
+        <FontAwesome name="calendar-check-o" size={24} color="#fff" />
       </TouchableOpacity>
     </View>
   );

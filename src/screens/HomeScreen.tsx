@@ -47,9 +47,9 @@ export default function HomeScreen() {
           <Text style={styles.cardText}>Sobre</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate("(tabs)/perfil")}>
-          <FontAwesome name="user" size={28} color="#fff" />
-          <Text style={styles.cardText}>Perfil</Text>
+        <TouchableOpacity style={styles.card} onPress={() => navigation.navigate("(tabs)/agenda")}>
+          <FontAwesome name="calendar-check-o" size={28} color="#fff" />
+          <Text style={styles.cardText}>Agenda</Text>
         </TouchableOpacity>
 
         <TouchableOpacity

@@ -7,15 +7,66 @@ import {
   TouchableOpacity,
   ScrollView,
 } from "react-native";
-import { useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import { FontAwesome5 } from "@expo/vector-icons";
 import BottomBar from "../components/BottomBar";
 
+// Mapeia dados por esporte
+const esportesData: Record<
+  string,
+  {
+    image: any;
+    subtitle: string;
+    description: string;
+    topics: { icon: any; text: string }[];
+  }
+> = {
+  Futebol: {
+    image: require("../assets/soccer.avif"),
+    subtitle: "Saúde, bem-estar e diversão",
+    description:
+      "Participe das nossas atividades esportivas semanais e melhore seu condicionamento físico enquanto se diverte!",
+    topics: [
+      { icon: "running", text: "Corridas e caminhadas em grupo" },
+      { icon: "futbol", text: "Futebol e vôlei aos finais de semana" },
+      { icon: "bicycle", text: "Passeios ciclísticos pela cidade" },
+    ],
+  },
+  "Esporte sem Barreiras": {
+    image: require("../assets/pcd.avif"),
+    subtitle: "Inclusão e acessibilidade para todos",
+    description:
+      "Atividades adaptadas para pessoas com deficiência, promovendo saúde e integração social.",
+    topics: [
+      { icon: "wheelchair", text: "Modalidades para cadeirantes" },
+      { icon: "hands-helping", text: "Apoio e acompanhamento constante" },
+      { icon: "heart", text: "Promoção de autoestima e bem-estar" },
+    ],
+  },
+  Capoeira: {
+    image: require("../assets/capoeira.avif"),
+    subtitle: "Cultura, ritmo e movimento",
+    description:
+      "Venha vivenciar a arte da capoeira e desenvolver equilíbrio, ritmo e força física.",
+    topics: [
+      { icon: "music", text: "Roda de capoeira com instrumentos" },
+      { icon: "heartbeat", text: "Atividade física com consciência corporal" },
+      { icon: "users", text: "Socialização e trabalho em grupo" },
+    ],
+  },
+};
+
 export default function EsportesScreen() {
   const router = useRouter();
+  const { titulo } = useLocalSearchParams();
+  const esporte = titulo?.toString() || "";
+  const data = esportesData[esporte];
 
   const handleParticipar = () => {
-    alert("🎉 Você se inscreveu para participar!");
+    router.push({
+      pathname: "/confirmacao",
+      params: { titulo: esporte },
+    });
   };
 
   const handleNavigate = (route: string) => {
@@ -29,8 +80,8 @@ export default function EsportesScreen() {
       case "sobre":
         router.push("/sobre");
         break;
-      case "home":
-        router.push("/home");
+      case "agenda":
+        router.push("/agenda");
         break;
       default:
         console.warn("Rota inválida:", route);
@@ -41,58 +92,38 @@ export default function EsportesScreen() {
     router.back();
   };
 
+  if (!data) {
+    return (
+      <View style={styles.scrollContainer}>
+        <Text style={styles.title}>Esporte não encontrado</Text>
+      </View>
+    );
+  }
+
   return (
     <ScrollView contentContainerStyle={styles.scrollContainer}>
       <TouchableOpacity style={styles.backButton} onPress={handleVoltar}>
         <FontAwesome5 name="arrow-left" size={20} color="#16232C" />
       </TouchableOpacity>
       <View style={styles.card}>
-        <Text style={styles.title}>Futebol</Text>
+        <Text style={styles.title}>{esporte}</Text>
 
-        <Image
-          source={require("../assets/soccer.avif")}
-          style={styles.image}
-          resizeMode="cover"
-        />
+        <Image source={data.image} style={styles.image} resizeMode="cover" />
 
-        <Text style={styles.subtitle}>Saúde, bem-estar e diversão</Text>
+        <Text style={styles.subtitle}>{data.subtitle}</Text>
+        <Text style={styles.description}>{data.description}</Text>
 
-        <Text style={styles.description}>
-          Participe das nossas atividades esportivas semanais e melhore seu
-          condicionamento físico enquanto se diverte!
-        </Text>
-
-        <View style={styles.topic}>
-          <FontAwesome5
-            name="running"
-            size={22}
-            color="#16232C"
-            style={styles.icon}
-          />
-          <Text style={styles.topicText}>Corridas e caminhadas em grupo</Text>
-        </View>
-
-        <View style={styles.topic}>
-          <FontAwesome5
-            name="futbol"
-            size={22}
-            color="#16232C"
-            style={styles.icon}
-          />
-          <Text style={styles.topicText}>
-            Futebol e vôlei aos finais de semana
-          </Text>
-        </View>
-
-        <View style={styles.topic}>
-          <FontAwesome5
-            name="bicycle"
-            size={22}
-            color="#16232C"
-            style={styles.icon}
-          />
-          <Text style={styles.topicText}>Passeios ciclísticos pela cidade</Text>
-        </View>
+        {data.topics.map((topic, index) => (
+          <View key={index} style={styles.topic}>
+            <FontAwesome5
+              name={topic.icon}
+              size={22}
+              color="#16232C"
+              style={styles.icon}
+            />
+            <Text style={styles.topicText}>{topic.text}</Text>
+          </View>
+        ))}
 
         <TouchableOpacity style={styles.button} onPress={handleParticipar}>
           <Text style={styles.buttonText}>Participar</Text>

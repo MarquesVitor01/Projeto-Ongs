@@ -9,24 +9,83 @@ import {
   Platform,
   Alert,
 } from "react-native";
-import { useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import { FontAwesome5, Feather } from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../config/firebaseConfig";
+import { useUser } from "../context/UserContext";
+
+// Define os nomes possíveis dos esportes como tipo
+type EsporteNome = "Futebol" | "Esporte sem Barreiras" | "Capoeira";
+
+const esportesData: Record<EsporteNome, { horario: string; local: string }> = {
+  Futebol: {
+    horario: "Finais de semana",
+    local: "Parque da Cidade",
+  },
+  "Esporte sem Barreiras": {
+    horario: "Quartas e sextas",
+    local: "Centro Esportivo Inclusivo",
+  },
+  Capoeira: {
+    horario: "Terças e quintas à noite",
+    local: "Centro Cultural do Bairro",
+  },
+};
 
 export default function ConfirmacaoScreen() {
+  const { user } = useUser();
   const router = useRouter();
+  const { titulo } = useLocalSearchParams();
+  const esporte = (titulo?.toString() || "") as EsporteNome;
+
   const [selectedOption, setSelectedOption] = useState("iniciante");
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [nascimento, setNascimento] = useState("");
 
-  const handleConfirmar = () => {
-    if (!nome || !email || !nascimento) {
-      Alert.alert("Campos obrigatórios", "Preencha todos os campos para continuar.");
+  const info = esportesData[esporte] ?? {
+    horario: "Horário indefinido",
+    local: "Local indefinido",
+  };
+
+  const handleSubmit = async () => {
+    if (!esporte || !selectedOption || !nome || !email || !nascimento) {
+      Alert.alert("Erro", "Preencha todos os campos obrigatórios.");
       return;
     }
 
-    Alert.alert("✅ Sucesso!", "Informações confirmadas com sucesso!");
+    try {
+      if (!user || !user.uid) {
+        Alert.alert("Erro", "Usuário não autenticado.");
+        return;
+      }
+
+      await addDoc(collection(db, "agenda"), {
+        userId: user.uid,
+        nome,
+        email,
+        nascimento,
+        selectedOption,
+        esporte,
+        horario: info.horario,
+        local: info.local,
+        createdAt: new Date().toLocaleDateString("pt-BR"),
+      });
+
+      Alert.alert("Sucesso", "Dados salvos com sucesso!");
+
+      setSelectedOption("iniciante");
+      setNome("");
+      setEmail("");
+      setNascimento("");
+
+      router.push("/finalizado");
+    } catch (error) {
+      console.error("Erro ao salvar:", error);
+      Alert.alert("Erro", "Não foi possível salvar os dados.");
+    }
   };
 
   return (
@@ -44,19 +103,34 @@ export default function ConfirmacaoScreen() {
 
         {/* Resumo da atividade */}
         <View style={styles.topic}>
-          <FontAwesome5 name="futbol" size={18} color="#5B2A6C" style={styles.icon} />
-          <Text style={styles.topicText}>Atividade escolhida: Futebol</Text>
+          <FontAwesome5
+            name="futbol"
+            size={18}
+            color="#5B2A6C"
+            style={styles.icon}
+          />
+          <Text style={styles.topicText}>Atividade escolhida: {esporte}</Text>
         </View>
         <View style={styles.topic}>
-          <FontAwesome5 name="calendar-alt" size={18} color="#5B2A6C" style={styles.icon} />
-          <Text style={styles.topicText}>Horário: Finais de semana</Text>
+          <FontAwesome5
+            name="calendar-alt"
+            size={18}
+            color="#5B2A6C"
+            style={styles.icon}
+          />
+          <Text style={styles.topicText}>Horário: {info.horario}</Text>
         </View>
         <View style={styles.topic}>
-          <FontAwesome5 name="map-marker-alt" size={18} color="#5B2A6C" style={styles.icon} />
-          <Text style={styles.topicText}>Local: Parque da Cidade</Text>
+          <FontAwesome5
+            name="map-marker-alt"
+            size={18}
+            color="#5B2A6C"
+            style={styles.icon}
+          />
+          <Text style={styles.topicText}>Local: {info.local}</Text>
         </View>
 
-        {/* Inputs */}
+        {/* Formulário */}
         <View style={styles.formGroup}>
           <Text style={styles.label}>Nome completo</Text>
           <TextInput
@@ -78,7 +152,23 @@ export default function ConfirmacaoScreen() {
             style={styles.input}
             placeholder="DD/MM/AAAA"
             value={nascimento}
-            onChangeText={setNascimento}
+            keyboardType="numeric"
+            maxLength={10}
+            onChangeText={(text) => {
+              // Remove tudo que não é número
+              const cleaned = text.replace(/\D/g, "");
+
+              // Aplica a formatação DD/MM/AAAA
+              let formatted = cleaned;
+              if (cleaned.length > 2) {
+                formatted = cleaned.slice(0, 2) + "/" + cleaned.slice(2);
+              }
+              if (cleaned.length > 4) {
+                formatted = formatted.slice(0, 5) + "/" + cleaned.slice(4, 8);
+              }
+
+              setNascimento(formatted);
+            }}
           />
         </View>
 
@@ -98,7 +188,7 @@ export default function ConfirmacaoScreen() {
           </View>
         </View>
 
-        <TouchableOpacity style={styles.button} onPress={handleConfirmar}>
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
           <Text style={styles.buttonText}>Confirmar Participação</Text>
         </TouchableOpacity>
       </View>

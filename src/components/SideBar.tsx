@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { FontAwesome } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { useUser } from '../context/UserContext';
 
 interface SideBarProps {
   visible: boolean;
@@ -9,6 +10,7 @@ interface SideBarProps {
 }
 
 export default function SideBar({ visible, onClose }: SideBarProps) {
+  const { user } = useUser();
   const navigation = useNavigation();
 
   if (!visible) return null;
@@ -25,8 +27,8 @@ export default function SideBar({ visible, onClose }: SideBarProps) {
           <Text style={styles.closeText}>×</Text>
         </TouchableOpacity>
 
-        <Image source={require('../assets/user.png')} style={styles.avatar} />
-        <Text style={styles.userName}>Ian</Text>
+        <Image source={require('../assets/logo.png')} style={styles.avatar} resizeMode="contain"/>
+        <Text style={styles.userName}>{user?.nome}</Text>
 
         <View style={styles.menuContainer}>
           <TouchableOpacity style={styles.menuButton} onPress={() => handleNavigate('home')}>
@@ -34,9 +36,9 @@ export default function SideBar({ visible, onClose }: SideBarProps) {
             <Text style={styles.menuText}>Início</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.menuButton} onPress={() => handleNavigate('(tabs)/perfil')}>
-            <FontAwesome name="user" size={20} color="#fff" style={styles.icon} />
-            <Text style={styles.menuText}>Perfil</Text>
+          <TouchableOpacity style={styles.menuButton} onPress={() => handleNavigate('(tabs)/agenda')}>
+            <FontAwesome name="calendar-check-o" size={20} color="#fff" style={styles.icon} />
+            <Text style={styles.menuText}>Agenda</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={styles.menuButton} onPress={() => handleNavigate('(tabs)/sobre')}>
@@ -97,9 +99,8 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   avatar: {
-    width: 150,
-    height: 150,
-    borderRadius: 75,
+    width: 100,
+    height: 100,
     alignSelf: 'center',
     marginBottom: 10,
   },
