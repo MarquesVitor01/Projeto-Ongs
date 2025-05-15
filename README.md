@@ -10,6 +10,21 @@
 
 Principal objetivo do **Jogada Certa** é reunir iniciativas esportivas com foco social, proporcionando uma plataforma onde ONGs podem divulgar seus projetos, realizar campanhas de arrecadação e conectar com voluntários e parceiros dispostos a ajudar. O app oferece uma maneira simples e eficiente de se engajar com a comunidade, ajudar no desenvolvimento de novas iniciativas e promover um impacto positivo por meio do esporte.
 
+## Progresso do Projeto
+
+- ✅ **Integração com a API**: A comunicação entre o frontend (React Native) e o backend (Node.js/Express) foi estabelecida com sucesso, permitindo o envio e recebimento de dados em tempo real, autenticação de usuários e acesso às informações armazenadas no Firebase.
+
+- ✅ **Desenvolvimento até a oitava tela do aplicativo**: Já foram desenvolvidas e implementadas as oito primeiras telas do app, incluindo:
+  - Tela de Boas-Vindas
+  - Tela de Login e Cadastro com autenticação via Firebase
+  - Tela Inicial com resumo de projetos sociais
+  - Tela de Detalhes do Projeto
+  - Tela de Doações
+  - Tela de Eventos
+  - Tela de Perfil do Usuário
+
+- ✅ **Fluxo de navegação funcional**: A navegação entre as telas está implementada utilizando React Navigation, garantindo uma experiência fluida e coerente para o usuário.
+
 ## Tecnologias Usadas
 
 - **Frontend**: React Native (para aplicativos móveis Android e iOS)
